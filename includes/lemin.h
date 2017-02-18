@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:23:34 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/17 19:03:06 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/18 18:12:38 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,21 @@
 
 typedef struct s_room{
 	char	*name;
+	int		nb_of_links;
+	t_list	*links;
 	int		coordx;
 	int		coordy;
 	int		end;
 	int		start;
+	int		parent;
+	int		color;
 }				t_room;
 
 typedef struct s_pipe{
-	int		room1;
-	int		room2;
+	char	*room1;
+	char	*room2;
+	int		room1id;
+	int		room2id;
 }				t_pipe;
 
 #endif
