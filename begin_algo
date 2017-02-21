@@ -1,0 +1,15 @@
+ft_find_path(room, nb_of_rooms);
+
+
+void	ft_find_path(t_room *room, int nb_of_rooms)
+{
+	int j;
+
+	j = 0;
+	while(j <= nb_of_rooms)
+	{
+		room[j].parent = -1;
+		room[j].color = 0;
+		room[j].d = 0;
+	}
+}

@@ -6,36 +6,47 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:08:33 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/18 18:23:03 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/21 20:36:45 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
+#include <unistd.h>
 
-int	ft_is_pipe(char *line)
+void	dg_print_rooms(t_room *room, int nb_of_rooms)
 {
-	char	*dash;
+	int i;
 
-	if (!(dash = ft_strchr(line, '-')) ||
-			dash == line ||
-				ft_strchr(dash + 1, '-')||
-					!ft_strlen(dash + 1))
-		return (0);
-	return (1);
+	i = 0;
+	printf("\n######## Print - Rooms ########\n\n");
+	while (i < nb_of_rooms)
+	{
+		printf("%-10s | status: %i\n", room->name, room->status);
+		room++;
+		i++;
+	}
 }
 
-int		ft_is_room(char *line)
+void	dg_print_links(t_room *room, int nb_of_rooms)
 {
-	char	*space1;
-	char	*space2;
+	int		i;
+	t_list *tmp;
 
-	if (ft_strchr("L#", *line) ||
-		!(space1 = ft_strchr(line, ' ')) ||
-			!(space2 = ft_strchr(space1 + 1, ' ')) ||
-				!(ft_strnisdigit(space1 + 1, space2 - (space1 + 1))) ||
-					!ft_strisdigit(space2 + 1))
-		return (0);
-	return (1);
+	i = 0;
+	printf("\n######## Print - links ########\n");
+
+	while (i  < nb_of_rooms)
+	{
+		printf("\n");
+		tmp = room[i].links;
+		while (tmp)
+		{
+			// printf("i vaut %i :", i);
+			printf("%s-%s\n",room[i].name, room[*(int*)(tmp->content)].name);
+			tmp = tmp->next;
+		}
+		i++;
+	}
 }
 
 int		main()
@@ -45,86 +56,54 @@ int		main()
 	t_room	*room;
 	int		step;
 	int		error;
-	int		start;
-	int		end;
-	int		i;
-	int		j;
-	t_pipe	pipe;
+	int		status;
+	int		nb_of_rooms;
 
 	nb_of_ants = 0;
 	step = 0;
 	error = 0;
-	start = 0;
-	end = 0;
-	i = 0;
-	j = 0;
+	status = 0;
+	nb_of_rooms = 0;
 
 	// Find a way to know the number of room before doing anything
-	room = malloc(sizeof(t_room) * 10);
+	room = malloc(sizeof(t_room) * 15);
 	while (get_next_line(0, &line))
 	{
-		printf(">>>>>> %s\n", line);
-		if (step == 0)
+		if (ft_strisdigit(line) && step == 0)
 		{
-			if (!ft_strisdigit(line))
-				error++;
 			nb_of_ants = ft_atoi(line);
-			step = 1;
+			if (nb_of_ants <= 0)
+			{
+				free(line);
+				return (0);
+			}
+		step = 1;
 		}
-		if (!ft_strcmp(line, "##start"))
-			start = 1;
-		if (!ft_strcmp(line, "##end"))
-			end = 1;
-		if (ft_is_room(line))
+
+		status = (!ft_strcmp(line, "##start")) ? 1 : status;
+		status = (!ft_strcmp(line, "##end")) ? 2 : status;
+
+		if (ft_is_room(line) && step == 1)
 		{
-			ft_bzero(&room[i], sizeof(t_room));
-			// if (pipe != 0)
-			// 	printf("ERROR\n");
-			room[i].name = ft_strndup(line, ft_strchr(line, ' ') - line);
-			room[i].start = start;
-			room[i].end = end;
-			start = 0;
-			end = 0;
-			// printf("	nom : %s| start : %i et end : %i ### \n", room[i].name, room[i].start, room[i].end);
-
-			// Check if not duplicates in name or no 2 starts or 2 ends
-			i++;
+			ft_build_room(line, room, &status, nb_of_rooms);
+			nb_of_rooms++;
 		}
-
-		if (ft_is_pipe(line))
+		if (ft_is_pipe(line, room))
 		{
-			pipe.room1 = ft_strndup(line, ft_strchr(line, '-') - line);
-			pipe.room2 = ft_strchr(line, '-') + 1;
-			j = 0;
-			while (j < i && ft_strcmp(room[j].name, pipe.room1))
-				j++;
-			pipe.room1id = j;
-			j = 0;
-			while (j < i && ft_strcmp(room[j].name, pipe.room2))
-				j++;
-			pipe.room2id = j;
-			if (room[pipe.room1id].links)
-				room[pipe.room1id].links = ft_lstnew(&(pipe.room2id), sizeof(int));
-			else
-				ft_lstadd(&room[pipe.room1id].links, ft_lstnew(&(pipe.room2id), sizeof(int)));
+			ft_build_pipe(line, room, nb_of_rooms);
+			step = 2;
 		}
-			// Check if coherent with the rooms
-			// Add pipe to the chained list
-
 		free(line);
 	}
+	printf("%s-%s\n",room[0].name, room[*(int*)(room[0].links->content)].name);
 
-	j = 0;
-	while (j < i)
-	{
-		printf("room name is %s\n", room[j].name);
-		while (room[j].links)
-		{
-			printf("link : %i\n", *(int*)(room[j].links->content));
-			room[j].links = room[j].links->next;
-		}
-		j++;
-	}
-	printf("nb_of_ants is: %i\n", nb_of_ants);
+ // 	Debug section
+	printf("\n\nnb_of_ants is: %i\n", nb_of_ants);
+	dg_print_rooms(room, nb_of_rooms);
+	dg_print_links(room, nb_of_rooms);
+	printf("%s-%s\n",room[0].name, room[*(int*)(room[0].links->content)].name);
+
+	ft_find_path(room, nb_of_rooms);
+
 	return (0);
 }
