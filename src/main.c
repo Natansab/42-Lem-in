@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:08:33 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/21 20:36:45 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/22 15:01:06 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,13 @@ int		main()
 	int		status;
 	int		nb_of_rooms;
 
-	nb_of_ants = 0;
 	step = 0;
 	error = 0;
 	status = 0;
 	nb_of_rooms = 0;
 
-	// Find a way to know the number of room before doing anything
-	room = malloc(sizeof(t_room) * 15);
+
+	room = malloc(sizeof(t_room) * 1500);
 	while (get_next_line(0, &line))
 	{
 		if (ft_strisdigit(line) && step == 0)
@@ -101,7 +100,7 @@ int		main()
 	printf("\n\nnb_of_ants is: %i\n", nb_of_ants);
 	dg_print_rooms(room, nb_of_rooms);
 	dg_print_links(room, nb_of_rooms);
-	printf("%s-%s\n",room[0].name, room[*(int*)(room[0].links->content)].name);
+	// printf("%s-%s\n",room[0].name, room[*(int*)(room[0].links->content)].name);
 
 	ft_find_path(room, nb_of_rooms);
 
