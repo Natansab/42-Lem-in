@@ -6,15 +6,17 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:23:34 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/21 20:17:53 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/22 17:24:31 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEMIN_H
 # define LEMIN_H
+# define BUFF_SIZE 1000
 
 #include "../libft/libft.h"
 #include <stdlib.h>
+#include <unistd.h>
 #include <stdio.h>
 
 typedef struct s_room{
@@ -40,5 +42,7 @@ int		ft_is_room(char *line);
 void	ft_build_room(char *line, t_room *room, int *status, int i);
 void	ft_find_path(t_room *room, int nb_of_rooms);
 void	dg_print_links(t_room *room, int nb_of_rooms);
-
+void	dg_print_rooms(t_room *room, int nb_of_rooms);
+void	ft_read_std(t_room **room, int *nb_of_ants, int *nb_of_rooms);
+char	*ft_stdtostr();
 #endif

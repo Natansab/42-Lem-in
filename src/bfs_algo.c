@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fbs_algo.c                                         :+:      :+:    :+:   */
+/*   bfs_algo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 19:37:06 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/22 14:36:01 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/22 17:07:14 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_print_smallest_path(t_room *room)
 		j = room[j].parent;
 	}
 	printf("%s", room[j].name);
-	printf("Length of the path:\n%i", count);
+	printf("\nLength of the path:\n%i", count);
 }
 
 void	ft_find_path_inner(t_room *room, int level, int curr_room)
@@ -60,7 +60,7 @@ void	ft_find_path_inner(t_room *room, int level, int curr_room)
 			printf("room[*(int*)link->content].parent : %i\n", room[*(int*)link->content].parent);
 			if (room[*(int*)link->content].status == 2)
 			{
-				printf("Smallest path found: \n\n\n");
+				printf("\nSmallest path found: \n\n\n");
 				ft_print_smallest_path(room);
 				exit (0);
 			}

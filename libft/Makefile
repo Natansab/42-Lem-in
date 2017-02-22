@@ -6,7 +6,7 @@
 #    By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/06 14:03:12 by nsabbah           #+#    #+#              #
-#    Updated: 2017/02/17 17:55:43 by nsabbah          ###   ########.fr        #
+#    Updated: 2017/02/22 15:29:07 by nsabbah          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRC = ft_strcat.c ft_strncat.c  \
 	ft_itoa.c ft_lstnew.c ft_lstdelone.c \
 	ft_lstdel.c ft_lstadd.c ft_lstiter.c \
 	ft_lstmap.c get_next_line.c ft_abs.c \
-	ft_strisdigit.c ft_strnisdigit.c
+	ft_strisdigit.c ft_strnisdigit.c ft_realloc.c
 
 
 OBJ = ft_strcat.o  ft_strcpy.o  ft_strdup.o ft_strndup.o ft_strlen.o \
@@ -51,7 +51,7 @@ OBJ = ft_strcat.o  ft_strcpy.o  ft_strdup.o ft_strndup.o ft_strlen.o \
 	ft_putnbr_fd.o ft_striteri.o ft_strmap.o ft_strmapi.o ft_strequ.o \
 	ft_strsub.o ft_strjoin.o ft_strtrim.o ft_strsplit.o ft_strnequ.o ft_itoa.o \
 	ft_lstnew.o ft_lstdelone.o ft_lstdel.o ft_lstadd.o ft_lstiter.o ft_lstmap.o \
-	get_next_line.o ft_abs.o ft_strisdigit.o ft_strnisdigit.o
+	get_next_line.o ft_abs.o ft_strisdigit.o ft_strnisdigit.o ft_realloc.o
 
 all: $(NAME)
 

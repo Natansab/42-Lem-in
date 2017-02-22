@@ -6,13 +6,13 @@
 #    By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/08 17:26:44 by nsabbah           #+#    #+#              #
-#    Updated: 2017/02/22 14:54:56 by nsabbah          ###   ########.fr        #
+#    Updated: 2017/02/22 17:00:37 by nsabbah          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem-in
 
-SRC = main.c pipe.c room.c bfs_algo.c
+SRC = main.c pipe.c room.c bfs_algo.c read.c debug.c
 
 OBJ = $(addprefix $(OBJDIR),$(SRC:.c=.o))
 

@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 14:03:09 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/17 17:59:02 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/22 15:27:54 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,5 @@ int				get_next_line(const int fd, char **line);
 int				ft_abs(int nb);
 int				ft_strisdigit(char *str);
 int				ft_strnisdigit(char *str, int n);
+char			**ft_realloc(char **tab, char *neww);
 #endif
