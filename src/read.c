@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 16:48:24 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/23 15:16:37 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/23 17:35:24 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*mini_gnl(int *ret, char *file)
 	return (line);
 }
 
-void	ft_read_std(t_room **room, int *nb_of_ants, int *nb_of_rooms, char *file)
+int		ft_read_std(t_room **room, int *nb_of_ants, int *nb_of_rooms, char *file)
 {
 	int		step;
 	int		status;
@@ -60,10 +60,10 @@ void	ft_read_std(t_room **room, int *nb_of_ants, int *nb_of_rooms, char *file)
 	status = 0;
 	ret = 0;
 	error = 0;
+	line = NULL;
 	while (ret < (int)ft_strlen(file))
 	{
 		line = mini_gnl(&ret, file);
-
 		if (ft_strisdigit(line) && step == 0)
 		{
 			if ((*nb_of_ants = ft_atoi(line)) <= 0)
@@ -81,10 +81,7 @@ void	ft_read_std(t_room **room, int *nb_of_ants, int *nb_of_rooms, char *file)
 			ft_build_room(line, *room, &status, *nb_of_rooms);
 			(*nb_of_rooms)++;
 			if (ft_is_room_dup(*room, *nb_of_rooms))
-			{
 				error = 1;
-				break;
-			}
 		}
 		else if (ft_is_pipe(line, *room) && step >= 1)
 		{
@@ -92,17 +89,16 @@ void	ft_read_std(t_room **room, int *nb_of_ants, int *nb_of_rooms, char *file)
 			step = 2;
 		}
 		else
-		{
 			error = 2;
-			break ;
-		}
 		free(line);
+		line = NULL;
 	}
 	if (error)
 	{
-		printf("ERROR n%i\n", error);
-		free(line);
 		ft_putstr("ERROR\n");
-		exit (0);
+		if (line)
+			free(line);
+		return (1);
 	}
+	return (0);
 }

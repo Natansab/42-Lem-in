@@ -4,15 +4,15 @@
 end 0 0
 3 0 0
 ##start
-start 0 0
+starti 0 0
 sdf 0 0
 5 0 0
 6 0 0
 7 0 0
 #hello
-start-6
-start-5
-start-3
+starti-6
+starti-5
+starti-3
 5-7
 3-1
 1-end

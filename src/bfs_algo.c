@@ -6,12 +6,41 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 19:37:06 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/23 13:51:43 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/23 18:05:19 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
+char	**ft_pathtostr(t_room *room)
+{
+	int		i;
+	int		j;
+	char	**str;
+
+
+	i = 0;
+	while (room[i].status != 2)
+		i++;
+	str = malloc(sizeof(*str) * i + 1);
+	j = i;
+	i--;
+	while (room[j].status != 1)
+	{
+		str[i] = ft_strdup(room[j].name);
+		printf("str[%i] vaut %s", i, str[i]);
+		j = room[j].parent;
+		i--;
+	}
+	str[0] = ft_strdup(room[j].name);
+
+	return (str);
+}
+
+// void	ft_print_output(t_room)
+// {
+//
+// }
 void	ft_print_smallest_path(t_room *room)
 {
 	int	i;
@@ -39,10 +68,10 @@ void	ft_print_smallest_path(t_room *room)
 		j = room[j].parent;
 	}
 	printf("%s", room[j].name);
-	printf("\nLength of the path:\n%i", count);
+	printf("\nLength of the path: %i\n", count);
 }
 
-void	ft_find_path_inner(t_room *room, int level, int curr_room)
+int		ft_find_path_inner(t_room *room, int level, int curr_room)
 {
 	t_list *link;
 
@@ -61,16 +90,18 @@ void	ft_find_path_inner(t_room *room, int level, int curr_room)
 			if (room[*(int*)link->content].status == 2)
 			{
 				printf("\nSmallest path found: \n\n\n");
-				ft_print_smallest_path(room);
-				exit (0);
+				ft_pathtostr(room);
+				// ft_print_smallest_path(room);
+				return (1);
 			}
 		}
 	link = link->next;
 	}
+	return (0);
 }
 
 
-void	ft_find_path(t_room *room, int nb_of_rooms)
+int		ft_find_path(t_room *room, int nb_of_rooms)
 {
 	int		i;
 	int		level;
@@ -106,11 +137,13 @@ void	ft_find_path(t_room *room, int nb_of_rooms)
 		{
 			if (room[i].level == level - 1)
 			{
-				ft_find_path_inner(room, level, i);
+				if (ft_find_path_inner(room, level, i))
+					return (0);
 				bp = 1;
 			}
 			i++;
 		}
 	}
 	printf("\n\n######### PAS DE SOLUTION #########\n\n");
+	return (0);
 }

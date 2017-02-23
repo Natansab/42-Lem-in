@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 14:19:18 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/23 15:01:31 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/23 17:51:35 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,30 @@ int		ft_is_room_dup(t_room *room, int nb_of_rooms)
 		i++;
 	}
 	return (0);
+}
+
+void	ft_free_room(t_room *room, int nb_of_rooms)
+{
+	int i;
+	t_list *tmp;
+
+	i = 0;
+	while (i < nb_of_rooms)
+	{
+		if (room[i].name)
+		{
+			if (*(room[i].name))
+				free(room[i].name);
+			room[i].name = NULL;
+		}
+		while (room[i].links)
+		{
+			if (room[i].links->next)
+				tmp = room[i].links->next;
+			free(room[i].links->content);
+			free(room[i].links);
+			room[i].links = room[i].links->next;
+		}
+		i++;
+	}
 }
