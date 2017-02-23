@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 14:19:18 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/21 14:20:43 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/23 14:40:16 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	ft_build_pipe(char *line, t_room *room, int i)
 		j++;
 	pipe.room2id = j;
 	if (!room[pipe.room1id].links)
-		room[pipe.room1id].links = ft_lstnew(&(pipe.room2id), sizeof(int));
+		room[pipe.room1id].links = ft_lstnew(&(pipe.room2id), 4);
 	else
-		ft_lstadd(&room[pipe.room1id].links, ft_lstnew(&(pipe.room2id), sizeof(int)));
+		ft_lstadd(&room[pipe.room1id].links, ft_lstnew(&(pipe.room2id), 4));
 	if (!room[pipe.room2id].links)
-		room[pipe.room2id].links = ft_lstnew(&(pipe.room1id), sizeof(int));
+		room[pipe.room2id].links = ft_lstnew(&(pipe.room1id), 4);
 	else
-		ft_lstadd(&room[pipe.room2id].links, ft_lstnew(&(pipe.room1id), sizeof(int)));
+		ft_lstadd(&room[pipe.room2id].links, ft_lstnew(&(pipe.room1id), 4));
 	free(pipe.room1);
 }
 
@@ -56,7 +56,7 @@ int	ft_is_pipe(char *line, t_room *room)
 				!ft_strcmp(pipe.room2,room->name)) ? i + 1 : i;
 		room++;
 	}
-	if (i != 2 || pipe.room1 == pipe.room2)
+	if (i < 2 || pipe.room1 == pipe.room2)
 	{
 		free(pipe.room1);
 		return (0);

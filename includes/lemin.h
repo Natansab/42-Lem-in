@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:23:34 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/22 17:24:31 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/23 14:50:57 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_build_room(char *line, t_room *room, int *status, int i);
 void	ft_find_path(t_room *room, int nb_of_rooms);
 void	dg_print_links(t_room *room, int nb_of_rooms);
 void	dg_print_rooms(t_room *room, int nb_of_rooms);
-void	ft_read_std(t_room **room, int *nb_of_ants, int *nb_of_rooms);
+void	ft_read_std(t_room **room, int *nb_of_ants, int *nb_of_rooms, char *file);
 char	*ft_stdtostr();
+int		ft_is_room_dup(t_room *room, int nb_of_rooms);
 #endif
