@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:23:34 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/23 17:51:43 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/24 17:08:03 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#define MIN(x,y) (x <= y ? x : y)
+#define MAX(x,y) (x <= y ? y : x)
 
 typedef struct s_room{
 	char	*name;
@@ -47,4 +49,6 @@ int		ft_read_std(t_room **room, int *nb_of_ants, int *nb_of_rooms, char *file);
 char	*ft_stdtostr();
 int		ft_is_room_dup(t_room *room, int nb_of_rooms);
 void	ft_free_room(t_room *room, int nb_of_rooms);
+char	**ft_pathtostr(t_room *room);
+void	ft_print_output(char **str, int nb_of_ants);
 #endif

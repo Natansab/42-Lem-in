@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 19:37:06 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/23 18:05:19 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/24 15:18:09 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,27 @@ char	**ft_pathtostr(t_room *room)
 	i = 0;
 	while (room[i].status != 2)
 		i++;
-	str = malloc(sizeof(*str) * i + 1);
 	j = i;
-	i--;
-	while (room[j].status != 1)
+	i = room[i].level;
+	str = (char**)malloc(sizeof(char*) * (i + 2));
+	str[i + 1] = NULL;
+	// printf("str[%i] address is %p\n", i + 1, str[i+1]);
+	// str[i + 1] = ft_strdup("\0");
+	// ft_bzero(str, sizeof(str));
+	while (i >= 0)
 	{
 		str[i] = ft_strdup(room[j].name);
-		printf("str[%i] vaut %s", i, str[i]);
 		j = room[j].parent;
 		i--;
 	}
-	str[0] = ft_strdup(room[j].name);
-
 	return (str);
 }
-
+//
 // void	ft_print_output(t_room)
 // {
 //
 // }
+
 void	ft_print_smallest_path(t_room *room)
 {
 	int	i;
@@ -75,7 +77,7 @@ int		ft_find_path_inner(t_room *room, int level, int curr_room)
 {
 	t_list *link;
 
-	printf("\n####### CURRENT ROOM IS: %i #######\n", curr_room);
+	// printf("\n####### CURRENT ROOM IS: %i #######\n", curr_room);
 	link = room[curr_room].links;
 	while (link)
 	{
@@ -84,13 +86,13 @@ int		ft_find_path_inner(t_room *room, int level, int curr_room)
 			room[*(int*)link->content].level = level;
 			room[*(int*)link->content].parent = curr_room;
 			// Printing section
-			printf("\nId of changed room : %i\n", *(int*)link->content);
-			printf("room[*(int*)link->content].level : %i\n", room[*(int*)link->content].level);
-			printf("room[*(int*)link->content].parent : %i\n", room[*(int*)link->content].parent);
+			// printf("\nId of changed room : %i\n", *(int*)link->content);
+			// printf("room[*(int*)link->content].level : %i\n", room[*(int*)link->content].level);
+			// printf("room[*(int*)link->content].parent : %i\n", room[*(int*)link->content].parent);
 			if (room[*(int*)link->content].status == 2)
 			{
-				printf("\nSmallest path found: \n\n\n");
-				ft_pathtostr(room);
+				// printf("\nSmallest path found: \n\n\n");
+				// ft_pathtostr(room);
 				// ft_print_smallest_path(room);
 				return (1);
 			}
@@ -138,7 +140,7 @@ int		ft_find_path(t_room *room, int nb_of_rooms)
 			if (room[i].level == level - 1)
 			{
 				if (ft_find_path_inner(room, level, i))
-					return (0);
+					return (1);
 				bp = 1;
 			}
 			i++;

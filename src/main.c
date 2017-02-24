@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:08:33 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/23 17:54:44 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/24 15:17:45 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		main()
 	int		nb_of_rooms;
 	int		count;
 	char	*file;
+	char	**str;
 	int		i;
 	int		error;
 
@@ -46,12 +47,17 @@ int		main()
 	if (!error)
 	{
 		ft_putstr(file);
-		ft_find_path(room, nb_of_rooms);
+		if (ft_find_path(room, nb_of_rooms))
+		{
+			str = ft_pathtostr(room);
+			// printf("str[4] address is here %p\n", str[4]);
+			ft_print_output(str, nb_of_ants);
+		}
 	}
 	ft_free_room(room, count);
 	free(room);
 	free(file);
-	while (1)
-		;
+	// while (1)
+	// 	;
 	return (0);
 }
