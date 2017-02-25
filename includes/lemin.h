@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:23:34 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/24 17:08:03 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/25 11:04:55 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,21 @@ typedef struct s_room{
 	int		parent;
 	int		level;
 }				t_room;
+
+typedef struct s_env{
+	int			nb_of_ants;
+	t_room	*room;
+	int			nb_of_rooms;
+	int			count;
+	char		*file;
+	char		**str;
+	int			i;
+	int			error;
+	int		level;
+	int		curr_room;
+	int		j;
+	int		bp;
+}							t_env;
 
 typedef struct s_pipe{
 	char	*room1;

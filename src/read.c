@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 16:48:24 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/23 17:35:24 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/25 11:16:25 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@ char	*ft_stdtostr()
 	char	*tmp2;
 	int		ret;
 
-	tmp1 = malloc(1);
+	if (!(tmp1 = malloc(1)))
+		return NULL;
 	while ((ret = read(0, buf, BUFF_SIZE)))
 	{
 		buf[ret] = '\0';
 		tmp2 = ft_strdup(tmp1);
 		free(tmp1);
-		tmp1 = malloc(ft_strlen(tmp2) + BUFF_SIZE + 1);
+		if (!(tmp1 = malloc(ft_strlen(tmp2) + BUFF_SIZE + 1)))
+			return NULL;
 		tmp1 = ft_strcpy(tmp1, tmp2);
 		tmp1 = ft_strcat(tmp1, buf);
 		free(tmp2);
@@ -38,7 +40,8 @@ char	*mini_gnl(int *ret, char *file)
 	char *line;
 
 	if (ft_strchr(file + *ret, '\n'))
-		line = ft_strndup(file + *ret, ft_strchr(file + *ret, '\n') - (file + *ret));
+		line = ft_strndup(file + *ret, ft_strchr(file + *ret, '\n') -
+				(file + *ret));
 	else
 		line = ft_strdup(file + *ret);
 	*ret += ft_strlen(line) + 1;
@@ -53,9 +56,6 @@ int		ft_read_std(t_room **room, int *nb_of_ants, int *nb_of_rooms, char *file)
 	int		ret;
 	int		error;
 
-	// (void)room;
-	// (void)nb_of_ants;
-	// (void)nb_of_rooms;
 	step = 0;
 	status = 0;
 	ret = 0;

@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:08:33 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/25 09:16:20 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/25 10:32:54 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,43 +21,54 @@ void	ft_init(t_room room)
 	room.level = 0;
 }
 
-int		main()
+static void ft_free_strarr(char **str)
 {
-	int		nb_of_ants;
-	t_room	*room;
-	int		nb_of_rooms;
-	int		count;
-	char	*file;
-	char	**str;
-	int		i;
-	int		error;
+	int i;
 
 	i = 0;
-	count = 0;
-	file = ft_stdtostr();
-	while (file [i] && file[i++])
-		if (file[i] == '\n')
-			count++;
-	room = malloc(sizeof(t_room) * count);
-	i = 0;
-	while (i < count)
-		ft_init(room[i++]);
-	nb_of_rooms = 0;
-	error = ft_read_std(&room, &nb_of_ants, &nb_of_rooms, file);
-	if (!error)
+	while(str && str[i])
 	{
-		ft_putstr(file);
-		if (ft_find_path(room, nb_of_rooms))
-		{
-			str = ft_pathtostr(room);
-			// printf("str[4] address is here %p\n", str[4]);
-			ft_print_output(str, nb_of_ants);
-		}
+		free(str[i]);
+		i++;
 	}
-	ft_free_room(room, count);
-	free(room);
-	free(file);
-	// while (1)
-	// 	;
+	free(str);
+}
+
+static	void main_inner(t_env e)
+{
+	ft_putstr(e.file);
+	if (ft_find_path(e.room, e.nb_of_rooms))
+	{
+		e.str = ft_pathtostr(e.room);
+		ft_print_output(e.str, e.nb_of_ants);
+	}
+	ft_free_strarr(e.str);
+
+}
+
+int		main()
+{
+	t_env	e;
+
+	e.i = 0;
+	e.count = 0;
+	e.nb_of_rooms = 0;
+	e.file = ft_stdtostr();
+	while (e.file[e.i] && e.file[e.i++])
+		if (e.file[e.i] == '\n')
+			e.count++;
+	if (!(e.room = malloc(sizeof(t_room) * e.count)))
+		return (0);
+	e.i = 0;
+	while (e.i < e.count)
+		ft_init(e.room[e.i++]);
+	e.error = ft_read_std(&e.room, &e.nb_of_ants, &e.nb_of_rooms, e.file);
+	if (!e.error)
+		main_inner(e);
+	ft_free_room(e.room, e.count);
+	free(e.room);
+	free(e.file);
+	while(1)
+		;
 	return (0);
 }
