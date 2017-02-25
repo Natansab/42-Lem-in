@@ -6,20 +6,20 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:23:34 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/25 11:04:55 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/25 11:20:43 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEMIN_H
 # define LEMIN_H
 # define BUFF_SIZE 1000
+# define MIN(x,y) (x <= y ? x : y)
+# define MAX(x,y) (x <= y ? y : x)
 
 #include "../libft/libft.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
-#define MIN(x,y) (x <= y ? x : y)
-#define MAX(x,y) (x <= y ? y : x)
 
 typedef struct s_room{
 	char	*name;
