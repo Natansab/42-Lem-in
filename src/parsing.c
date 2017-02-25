@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 16:48:24 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/25 13:04:00 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/25 14:30:58 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,29 +61,31 @@ int		ft_read_std(t_room **room, int *nb_of_ants, int *nb_of_rooms, char *file)
 	ret = 0;
 	error = 0;
 	line = NULL;
+	// *room = NULL;
 	while (ret < (int)ft_strlen(file) && !(line = NULL))
 	{
 		line = mini_gnl(&ret, file);
 		if (ft_strisdigit(line) && step == 0 && (*nb_of_ants = ft_atoi(line)))
 			step = 1;
-		else if (step == 1 && !ft_strcmp(line, "##start"))
+		else if ((step == 1 || step == 2) && !ft_strcmp(line, "##start"))
 			status = 1;
-		else if (step == 1 && !ft_strcmp(line, "##end"))
+		else if ((step == 1 || step == 2) && !ft_strcmp(line, "##end"))
 			status = 2;
-		else if (ft_is_room(line) && step == 1)
+		else if ((step == 1 || step == 2) && ft_is_room(line) && (step = 2))
 		{
 			ft_build_room(line, *room, &status, *nb_of_rooms);
 			(*nb_of_rooms)++;
 		}
-		else if (ft_is_pipe(line, *room) && step >= 1 && (step = 2))
+		else if ( step >= 2 && ft_is_pipe(line, *room) && (step = 3))
 			ft_build_pipe(line, *room, *nb_of_rooms);
 		else if (line[0] != '#')
 			error = 2;
 		free(line);
 	}
-	if (error || ft_is_start_end(*room, *nb_of_rooms) || ft_is_room_dup(*room, *nb_of_rooms))
+	if (step != 3 || error || ft_is_start_end(*room, *nb_of_rooms) || ft_is_room_dup(*room, *nb_of_rooms))
 	{
 		ft_putstr("ERROR\n");
+		exit (0);
 		if (line)
 			free(line);
 		return (1);

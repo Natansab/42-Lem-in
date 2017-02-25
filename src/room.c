@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 14:19:18 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/25 12:49:57 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/25 14:25:53 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int		ft_is_room_dup(t_room *room, int nb_of_rooms)
 		}
 		j++;
 	}
-	printf("sortie\n");
 	return (0);
 }
 
