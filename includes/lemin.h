@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:23:34 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/25 11:20:43 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/25 12:31:34 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,5 @@ int		ft_is_room_dup(t_room *room, int nb_of_rooms);
 void	ft_free_room(t_room *room, int nb_of_rooms);
 char	**ft_pathtostr(t_room *room);
 void	ft_print_output(char **str, int nb_of_ants);
+int		ft_is_start_end(t_room *room, int nb_of_rooms);
 #endif

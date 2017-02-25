@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 16:48:24 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/25 13:04:00 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/25 13:01:26 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,19 @@ int		ft_read_std(t_room **room, int *nb_of_ants, int *nb_of_rooms, char *file)
 			status = 1;
 		else if (step == 1 && !ft_strcmp(line, "##end"))
 			status = 2;
-		else if (ft_is_room(line) && step == 1)
+		else if (ft_is_room(line) && (step == 1 || step == 2))
 		{
 			ft_build_room(line, *room, &status, *nb_of_rooms);
 			(*nb_of_rooms)++;
+			step = 2;
 		}
-		else if (ft_is_pipe(line, *room) && step >= 1 && (step = 2))
+		else if (ft_is_pipe(line, *room) && step >= 2 && (step = 3))
 			ft_build_pipe(line, *room, *nb_of_rooms);
 		else if (line[0] != '#')
 			error = 2;
 		free(line);
 	}
-	if (error || ft_is_start_end(*room, *nb_of_rooms) || ft_is_room_dup(*room, *nb_of_rooms))
+	if (step != 3 || error || ft_is_start_end(*room, *nb_of_rooms) || (ft_is_room_dup(*room, *nb_of_rooms)))
 	{
 		ft_putstr("ERROR\n");
 		if (line)

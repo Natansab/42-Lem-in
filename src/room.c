@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 14:19:18 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/23 17:51:35 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/25 12:49:57 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,42 @@ int		ft_is_room(char *line)
 
 int		ft_is_room_dup(t_room *room, int nb_of_rooms)
 {
-	char	*last_room;
+	int		i;
+	int		j;
+
+	j = 1;
+	while (j < nb_of_rooms)
+	{
+		i = 0;
+		while (i < j && room[i].name && room[j].name)
+		{
+			if (!ft_strcmp(room[i].name, room[j].name))
+				return (1);
+			i++;
+		}
+		j++;
+	}
+	printf("sortie\n");
+	return (0);
+}
+
+int		ft_is_start_end(t_room *room, int nb_of_rooms)
+{
+	int		start;
+	int		end;
 	int		i;
 
 	i = 0;
-	last_room = room[nb_of_rooms - 1].name;
-	while (i < nb_of_rooms - 1)
+	start = 0;
+	end = 0;
+	while (i < nb_of_rooms)
 	{
-		if (!ft_strcmp(room[i].name, last_room))
-			return (1);
+		start = (room[i].status == 1) ? start + 1 : start;
+		end = (room[i].status == 2) ? end + 1 : end;
 		i++;
 	}
+	if (start != 1 || end != 1)
+		return (1);
 	return (0);
 }
 
