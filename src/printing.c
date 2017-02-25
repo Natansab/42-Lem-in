@@ -6,57 +6,19 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 13:34:18 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/24 17:13:27 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/25 09:49:07 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-int		ft_nb_of_rooms(char **str)
+static void ft_print_in(char **str, int rooms, int nb_of_ants)
 {
 	int i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-void	ft_print_output(char **str, int nb_of_ants)
-{
-	int	ants_out;
-	int first_ant;
-	int rooms;
-	// int i;
-	// int j = 1;
-
-	rooms = ft_nb_of_rooms(str);
-	ants_out = 1;
-	first_ant = 1;
-	(void)str;
-	(void)nb_of_ants;
-
-	printf("\nrooms vaut %i\n", rooms);
-	// while (nb < rooms)
-	// 	;
-
-	// while(first_ant <= nb_of_ants)
-	// {
-	// 	i = 0;
-	// 	printf("\n");
-	// 	while (i <= (rooms - 1) && i < ants_out)
-	// 	{
-	// 		printf("L%i-%s ", first_ant + i, str[j]);
-	// 		i++;
-	// 	}
-	// 	ants_out++;
-	// 	j++;
-	// }
-
-	int	i;
-	int	j;
+	int j;
 
 	i = 1;
+	ft_putstr("\n");
 	while (i < rooms)
 	{
 		j = 0;
@@ -72,19 +34,60 @@ void	ft_print_output(char **str, int nb_of_ants)
 		ft_putstr("\n");
 		i++;
 	}
+}
+
+static void ft_print_btw(char **str, int rooms, int nb_of_ants)
+{
+	int i;
+	int j;
 
 	i = 1;
-	while (++i <= nb_of_ants - rooms)
+	while (++i < nb_of_ants - (rooms - 3))
 	{
-		j = -1;
-		while (++j < rooms + 1)
+		j = 0;
+		while (j < rooms - 1)
 		{
 			ft_putstr("L");
-			ft_putnbr(j + 1);
+			ft_putnbr(j + i);
 			ft_putstr("-");
-			ft_putstr(str[i - j]);
+			ft_putstr(str[rooms - 1 - j]);
+			ft_putstr(" ");
+			j++;
+		}
+		ft_putstr("\n");
+	}
+}
+
+static void ft_print_end(char **str, int rooms, int nb_of_ants)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (++i <= MIN(rooms - 2, nb_of_ants))
+	{
+		j = 0;
+		while (++j + i < MIN(rooms - 1, nb_of_ants) + 1)
+		{
+			ft_putstr("L");
+			ft_putnbr(MAX(nb_of_ants - rooms + 1, 0) + j + i);
+			ft_putstr("-");
+			ft_putstr(str[rooms - j]);
 			ft_putstr(" ");
 		}
 		ft_putstr("\n");
 	}
+}
+
+void	ft_print_output(char **str, int nb_of_ants)
+{
+	int rooms;
+
+	rooms = 0;
+	while (str[rooms])
+		rooms++;
+	ft_print_in(str, rooms, nb_of_ants);
+	if (nb_of_ants - (rooms - 2) - 1 > 0)
+		ft_print_btw(str, rooms, nb_of_ants);
+	ft_print_end(str, rooms, nb_of_ants);
 }
