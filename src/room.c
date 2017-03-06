@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 14:19:18 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/25 14:25:53 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/02/25 17:23:23 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		ft_is_room(char *line)
 	return (1);
 }
 
-int		ft_is_room_dup(t_room *room, int nb_of_rooms)
+int		room_dup(t_room *room, int nb_of_rooms)
 {
 	int		i;
 	int		j;
@@ -54,7 +54,7 @@ int		ft_is_room_dup(t_room *room, int nb_of_rooms)
 	return (0);
 }
 
-int		ft_is_start_end(t_room *room, int nb_of_rooms)
+int		s_e(t_room *room, int nb_of_rooms)
 {
 	int		start;
 	int		end;
