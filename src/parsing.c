@@ -6,13 +6,13 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 16:48:24 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/03/06 12:42:47 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/03/06 13:27:07 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-char	*ft_stdtostr()
+char	*ft_stdtostr(void)
 {
 	char	buf[BUFF_SIZE + 1];
 	char	*tmp1;
@@ -20,14 +20,14 @@ char	*ft_stdtostr()
 	int		ret;
 
 	if (!(tmp1 = malloc(1)))
-		return NULL;
+		return (NULL);
 	while ((ret = read(0, buf, BUFF_SIZE)))
 	{
 		buf[ret] = '\0';
 		tmp2 = ft_strdup(tmp1);
 		free(tmp1);
 		if (!(tmp1 = malloc(ft_strlen(tmp2) + BUFF_SIZE + 1)))
-			return NULL;
+			return (NULL);
 		tmp1 = ft_strcpy(tmp1, tmp2);
 		tmp1 = ft_strcat(tmp1, buf);
 		free(tmp2);
@@ -64,7 +64,7 @@ void	ft_exit_error(t_env e, t_room **room, int *nb_of_rooms)
 		ft_putstr_fd("ERROR\n", 2);
 		if (e.line)
 			free(e.line);
-		exit (0);
+		exit(0);
 	}
 }
 

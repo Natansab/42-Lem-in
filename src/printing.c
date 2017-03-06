@@ -6,13 +6,13 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 13:34:18 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/25 09:49:07 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/03/06 13:26:09 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-static void ft_print_in(char **str, int rooms, int nb_of_ants)
+static void	ft_print_in(char **str, int rooms, int nb_of_ants)
 {
 	int i;
 	int j;
@@ -36,7 +36,7 @@ static void ft_print_in(char **str, int rooms, int nb_of_ants)
 	}
 }
 
-static void ft_print_btw(char **str, int rooms, int nb_of_ants)
+static void	ft_print_btw(char **str, int rooms, int nb_of_ants)
 {
 	int i;
 	int j;
@@ -58,7 +58,7 @@ static void ft_print_btw(char **str, int rooms, int nb_of_ants)
 	}
 }
 
-static void ft_print_end(char **str, int rooms, int nb_of_ants)
+static void	ft_print_end(char **str, int rooms, int nb_of_ants)
 {
 	int i;
 	int j;
@@ -79,7 +79,7 @@ static void ft_print_end(char **str, int rooms, int nb_of_ants)
 	}
 }
 
-void	ft_print_output(char **str, int nb_of_ants)
+void		ft_print_output(char **str, int nb_of_ants)
 {
 	int rooms;
 

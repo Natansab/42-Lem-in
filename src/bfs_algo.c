@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 19:37:06 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/25 14:31:12 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/03/06 14:01:14 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ char	**ft_pathtostr(t_room *room)
 	int		i;
 	int		j;
 	char	**str;
-
 
 	i = 0;
 	while (room[i].status != 2)
@@ -49,24 +48,26 @@ int		ft_find_path_inner(t_room *room, int level, int curr_room)
 			if (room[*(int*)link->content].status == 2)
 				return (1);
 		}
-	link = link->next;
+		link = link->next;
 	}
 	return (0);
 }
 
+void	ft_init_room(t_room *room, t_env *e)
+{
+	room[e->i].parent = -1;
+	room[e->i].level = -1;
+}
 
 int		ft_find_path(t_room *room, int nb_of_rooms)
 {
 	t_env	e;
 
 	e.i = -1;
-	while(++e.i < nb_of_rooms)
-	{
-		room[e.i].parent = -1;
-		room[e.i].level = -1;
-	}
+	while (++e.i < nb_of_rooms)
+		ft_init_room(room, &e);
 	e.i = 0;
-	while(e.i < nb_of_rooms && room[e.i].status != 1)
+	while (e.i < nb_of_rooms && room[e.i].status != 1)
 		e.i++;
 	room[e.i].level = 0;
 	e.level = 1;
@@ -75,10 +76,14 @@ int		ft_find_path(t_room *room, int nb_of_rooms)
 	e.j = 1;
 	e.i = 0;
 	e.bp = 1;
-	while (e.bp == 1 && !(e.bp = 0) && (e.i = -1) && (e.level++))
+	while (e.bp == 1 && !(e.bp = 0))
+	{
+		e.i = -1;
+		e.level++;
 		while (++e.i < nb_of_rooms)
 			if (room[e.i].level == e.level - 1)
 				if ((e.bp = 1) && ft_find_path_inner(room, e.level, e.i))
 					return (1);
+	}
 	return (0);
 }

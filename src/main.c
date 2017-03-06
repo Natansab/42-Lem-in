@@ -6,27 +6,29 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:08:33 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/25 17:22:37 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/03/06 14:10:19 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-void	ft_init(t_room room)
+void			ft_init(t_room room)
 {
 	room.name = NULL;
 	room.links = NULL;
+	room.coordx = 0;
+	room.coordy = 0;
 	room.status = 0;
 	room.parent = 0;
 	room.level = 0;
 }
 
-static void ft_free_strarr(char **str)
+static void		ft_free_strarr(char **str)
 {
 	int i;
 
 	i = 0;
-	while(str && str[i])
+	while (str && str[i])
 	{
 		free(str[i]);
 		i++;
@@ -34,7 +36,7 @@ static void ft_free_strarr(char **str)
 	free(str);
 }
 
-static	void main_inner(t_env e)
+static	void	main_inner(t_env e)
 {
 	ft_putstr(e.file);
 	if (ft_find_path(e.room, e.nb_of_rooms))
@@ -43,10 +45,9 @@ static	void main_inner(t_env e)
 		ft_print_output(e.str, e.nb_of_ants);
 	}
 	ft_free_strarr(e.str);
-
 }
 
-int		main()
+int				main(void)
 {
 	t_env	e;
 

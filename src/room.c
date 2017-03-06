@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 14:19:18 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/02/25 17:23:23 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/03/06 14:17:14 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,13 @@ int		s_e(t_room *room, int nb_of_rooms)
 	return (0);
 }
 
-void	ft_free_room(t_room *room, int nb_of_rooms)
+void	ft_free_room(t_room *room, int nb_of_rooms_malloced)
 {
-	int i;
-	t_list *tmp;
+	int		i;
+	t_list	*tmp;
 
 	i = 0;
-	while (i < nb_of_rooms)
+	while (i < nb_of_rooms_malloced)
 	{
 		if (room[i].name)
 		{
