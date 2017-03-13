@@ -6,7 +6,7 @@
 #    By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/08 17:26:44 by nsabbah           #+#    #+#              #
-#    Updated: 2017/03/06 13:18:12 by nsabbah          ###   ########.fr        #
+#    Updated: 2017/03/13 14:03:10 by nsabbah          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC = main.c pipe.c room.c bfs_algo.c parsing.c printing.c
 OBJ = $(addprefix $(OBJDIR),$(SRC:.c=.o))
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 LIBFT = ./libft/libft.a
 LIBINC = -I./libft
 LIBLINK = -L./libft -lft

@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 14:19:18 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/03/06 14:17:14 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/03/13 14:33:49 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,12 @@ void	ft_free_room(t_room *room, int nb_of_rooms_malloced)
 		}
 		while (room[i].links)
 		{
+			tmp = NULL;
 			if (room[i].links->next)
 				tmp = room[i].links->next;
 			free(room[i].links->content);
 			free(room[i].links);
-			room[i].links = room[i].links->next;
+			room[i].links = tmp;
 		}
 		i++;
 	}

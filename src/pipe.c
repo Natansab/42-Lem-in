@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 14:19:18 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/03/06 13:24:12 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/03/13 13:54:02 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_build_pipe(char *line, t_room *room, int i)
 		ft_lstadd(&room[pipe.room2id].links, ft_lstnew(&(pipe.room1id), 4));
 }
 
-int		ft_is_pipe(char *line, t_room *room)
+int		ft_is_pipe(char *line, t_room *room, int nb_of_rooms)
 {
 	char	*dash;
 	t_pipe	pipe;
@@ -50,11 +50,11 @@ int		ft_is_pipe(char *line, t_room *room)
 	pipe.room1 = ft_strndup(line, ft_strchr(line, '-') - line);
 	pipe.room2 = ft_strchr(line, '-') + 1;
 	i = 0;
-	while (room && room->name)
+	while (i < nb_of_rooms && room && room->name)
 	{
 		i = (pipe.room1 && pipe.room2 && *(pipe.room1) && *(pipe.room2) &&
-			(!ft_strcmp(pipe.room1, room->name) ||
-				!ft_strcmp(pipe.room2, room->name))) ? i + 1 : i;
+				(!ft_strcmp(pipe.room1, room->name) ||
+					!ft_strcmp(pipe.room2, room->name))) ? i + 1 : i;
 		room++;
 	}
 	if (i < 2 || pipe.room1 == pipe.room2)

@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:23:34 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/03/06 14:10:21 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/03/13 13:50:56 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct	s_pipe{
 	int		room2id;
 }				t_pipe;
 
-int				ft_is_pipe(char *line, t_room *room);
+int				ft_is_pipe(char *line, t_room *room, int nb_of_rooms);
 void			ft_build_pipe(char *line, t_room *room, int i);
 int				ft_is_room(char *line);
 void			ft_build_room(char *line, t_room *room, int *status, int i);

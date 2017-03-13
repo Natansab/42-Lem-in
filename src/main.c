@@ -6,21 +6,21 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:08:33 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/03/13 10:33:43 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/03/13 14:37:59 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-void			ft_init(t_room room)
+void			ft_init(t_room *room)
 {
-	room.name = NULL;
-	room.links = NULL;
-	room.coordx = 0;
-	room.coordy = 0;
-	room.status = 0;
-	room.parent = 0;
-	room.level = 0;
+	room->name = NULL;
+	room->links = NULL;
+	room->coordx = 0;
+	room->coordy = 0;
+	room->status = 0;
+	room->parent = 0;
+	room->level = 0;
 }
 
 static void		ft_free_strarr(char **str)
@@ -38,7 +38,7 @@ static void		ft_free_strarr(char **str)
 
 static	void	main_inner(t_env e)
 {
-	if (ft_find_path(e.room, e.nb_of_rooms))
+	if (!e.error && ft_find_path(e.room, e.nb_of_rooms))
 	{
 		ft_putstr(e.file);
 		e.str = ft_pathtostr(e.room);
@@ -65,10 +65,9 @@ int				main(void)
 		return (0);
 	e.i = 0;
 	while (e.i < e.count)
-		ft_init(e.room[e.i++]);
+		ft_init(&(e.room[e.i++]));
 	e.error = ft_read_std(&e.room, &e.nb_of_ants, &e.nb_of_rooms, e.file);
-	if (!e.error)
-		main_inner(e);
+	main_inner(e);
 	ft_free_room(e.room, e.count);
 	free(e.room);
 	free(e.file);

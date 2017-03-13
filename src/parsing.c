@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 16:48:24 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/03/06 13:27:07 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/03/13 14:38:49 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	*ft_stdtostr(void)
 
 	if (!(tmp1 = malloc(1)))
 		return (NULL);
+	*tmp1 = '\0';
 	while ((ret = read(0, buf, BUFF_SIZE)))
 	{
 		buf[ret] = '\0';
@@ -56,15 +57,14 @@ void	ft_init_env(t_env *e)
 	(e->error) = 0;
 }
 
-void	ft_exit_error(t_env e, t_room **room, int *nb_of_rooms)
+void	ft_error(t_env e, t_room **room, int *nb_of_rooms, int *error)
 {
 	if (e.step != 3 || e.error || s_e(*room, *nb_of_rooms) ||
 			room_dup(*room, *nb_of_rooms))
 	{
-		ft_putstr_fd("ERROR\n", 2);
 		if (e.line)
 			free(e.line);
-		exit(0);
+		*error = 4;
 	}
 }
 
@@ -84,15 +84,16 @@ int		ft_read_std(t_room **room, int *nb_of_ants,
 			e.status = 1;
 		else if ((e.step == 1 || e.step == 2) && !ft_strcmp(e.line, "##end"))
 			e.status = 2;
-		else if ((e.step == 1 || e.step == 2) &&
-			ft_is_room(e.line) && (e.step = 2))
+		else if ((e.step == 1 || e.step == 2) && ft_is_room(e.line) &&
+				(e.step = 2))
 			ft_build_room(e.line, *room, &e.status, (*nb_of_rooms)++);
-		else if (e.step >= 2 && ft_is_pipe(e.line, *room) && (e.step = 3))
+		else if (e.step >= 2 && ft_is_pipe(e.line, *room, *nb_of_rooms) &&
+				(e.step = 3))
 			ft_build_pipe(e.line, *room, *nb_of_rooms);
 		else if (e.line[0] != '#')
 			e.error = 2;
 		free(e.line);
 	}
-	ft_exit_error(e, room, nb_of_rooms);
-	return (0);
+	ft_error(e, room, nb_of_rooms, &e.error);
+	return (e.error);
 }
