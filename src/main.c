@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:08:33 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/03/06 14:10:19 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/03/13 10:33:43 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,15 @@ static void		ft_free_strarr(char **str)
 
 static	void	main_inner(t_env e)
 {
-	ft_putstr(e.file);
 	if (ft_find_path(e.room, e.nb_of_rooms))
 	{
+		ft_putstr(e.file);
 		e.str = ft_pathtostr(e.room);
 		ft_print_output(e.str, e.nb_of_ants);
+		ft_free_strarr(e.str);
 	}
-	ft_free_strarr(e.str);
+	else
+		ft_putstr_fd("ERROR\n", 2);
 }
 
 int				main(void)
@@ -54,6 +56,7 @@ int				main(void)
 	e.i = 0;
 	e.count = 0;
 	e.nb_of_rooms = 0;
+	e.str = NULL;
 	e.file = ft_stdtostr();
 	while (e.file[e.i] && e.file[e.i++])
 		if (e.file[e.i] == '\n')
