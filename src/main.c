@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:08:33 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/03/13 15:53:57 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/03/13 17:09:50 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ int				main(void)
 	ft_free_room(e.room, e.count);
 	free(e.room);
 	free(e.file);
+	sleep(1);
 	return (0);
 }

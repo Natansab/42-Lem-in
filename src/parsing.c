@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 16:48:24 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/03/13 14:39:30 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/03/13 16:32:14 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		ft_read_std(t_room **room, int *nb_of_ants,
 	{
 		e.line = mini_gnl(&e.ret, file);
 		if (ft_strisdigit(e.line) && e.step == 0 &&
-				(*nb_of_ants = ft_atoi(e.line)))
+			ft_atoi(e.line) <= INT_MAX && (*nb_of_ants = ft_atoi(e.line)))
 			e.step = 1;
 		else if ((e.step == 1 || e.step == 2) && !ft_strcmp(e.line, "##start"))
 			e.status = 1;

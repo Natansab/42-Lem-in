@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/24 13:34:18 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/03/06 13:26:09 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/03/13 16:38:31 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ static void	ft_print_end(char **str, int rooms, int nb_of_ants)
 			ft_putstr(str[rooms - j]);
 			ft_putstr(" ");
 		}
-		ft_putstr("\n");
+		if (j > 1)
+			ft_putstr("\n");
 	}
 }
 
