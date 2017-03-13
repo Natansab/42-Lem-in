@@ -1,5 +1,5 @@
 10
-sdf1 0 0
+1 0 0
 ##end
 end 0 0
 3 0 0
@@ -14,5 +14,8 @@ sdf 0 0
 starti-6
 starti-5
 starti-3
-5-7
+7-sdf
+sdf-3
 3-1
+1-7
+end-7

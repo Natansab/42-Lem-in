@@ -6,7 +6,7 @@
 /*   By: nsabbah <nsabbah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 19:37:06 by nsabbah           #+#    #+#             */
-/*   Updated: 2017/03/06 14:01:14 by nsabbah          ###   ########.fr       */
+/*   Updated: 2017/03/13 15:53:07 by nsabbah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,13 @@ void	ft_init_room(t_room *room, t_env *e)
 	room[e->i].level = -1;
 }
 
+void	ft_index_init(t_env *e)
+{
+	e->j = 1;
+	e->i = 0;
+	e->bp = 1;
+}
+
 int		ft_find_path(t_room *room, int nb_of_rooms)
 {
 	t_env	e;
@@ -72,10 +79,9 @@ int		ft_find_path(t_room *room, int nb_of_rooms)
 	room[e.i].level = 0;
 	e.level = 1;
 	e.curr_room = e.i;
-	ft_find_path_inner(room, e.level, e.curr_room);
-	e.j = 1;
-	e.i = 0;
-	e.bp = 1;
+	if (ft_find_path_inner(room, e.level, e.curr_room))
+		return (1);
+	ft_index_init(&e);
 	while (e.bp == 1 && !(e.bp = 0))
 	{
 		e.i = -1;
